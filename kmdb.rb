@@ -69,14 +69,103 @@
 
 # Delete existing data, so you'll start fresh each time this script is run.
 # Use `Model.destroy_all` code.
-# TODO!
+Studio.destroy_all 
+Movie.destroy_all
+Actor.destroy_all
+Role.destroy_all
 
 # Generate models and tables, according to the domain model.
-# TODO!
+# Models generated using the rails generate model [ModelName]
+# Table structure defined in the respective Model migration files.
+# Overall tables and structure can be found in the schema.rb file
 
 # Insert data into the database that reflects the sample data shown above.
 # Do not use hard-coded foreign key IDs.
-# TODO!
+
+# Studio population
+new_studio = Studio.new
+new_studio["name"] = "Warner Bros."
+new_studio.save
+# Used 'puts Studio.all.inspect' to check that the studio had been succesfully created
+
+#Movies population
+b_begins = Movie.new
+b_begins["title"] = "Batman Begins"
+b_begins["year_released"] = "2005"
+b_begins["rated"] = "PG-13"
+b_begins["studio_id"] = Studio.find_by({ "name" => "Warner Bros." })["id"]
+b_begins.save
+
+# Confirmed that the Movie is being correctly associated with the proper studio by comparing puts Studio.all.inspect
+# and puts Movie.all.inspect
+
+dark_knight = Movie.new
+dark_knight["title"] = "The Dark Knight"
+dark_knight["year_released"] = "2008"
+dark_knight["rated"] = "PG-13"
+dark_knight["studio_id"] = Studio.find_by({ "name" => "Warner Bros." })["id"]
+dark_knight.save
+
+dark_rises = Movie.new
+dark_rises["title"] = "The Dark Knight Rises"
+dark_rises["year_released"] = "2012"
+dark_rises["rated"] = "PG-13"
+dark_rises["studio_id"] = Studio.find_by({ "name" => "Warner Bros." })["id"]
+dark_rises.save
+
+#Actors population
+c_bale = Actor.new
+c_bale["name"] = "Christian Bale"
+c_bale.save
+
+m_caine = Actor.new
+m_caine["name"] = "Michael Caine"
+m_caine.save
+
+l_neeson = Actor.new
+l_neeson["name"] = "Liam Neeson"
+l_neeson.save
+
+k_holmes = Actor.new
+k_holmes["name"] = "Katie Holmes"
+k_holmes.save
+
+g_oldman = Actor.new
+g_oldman["name"] = "Gary Oldman"
+g_oldman.save
+
+h_ledger = Actor.new
+h_ledger["name"] = "Heath Ledger"
+h_ledger.save
+
+a_eckhart = Actor.new
+a_eckhart["name"] = "Aaron Eckhart"
+a_eckhart.save
+
+m_gyllenhaal = Actor.new
+m_gyllenhaal["name"] = "Maggie Gyllenhaal"
+m_gyllenhaal.save
+
+t_hardy = Actor.new
+t_hardy["name"] = "Tom Hardy"
+t_hardy.save
+
+j_gordon = Actor.new
+j_gordon["name"] = "Joseph Gordon-Levitt"
+j_gordon.save
+
+a_hathaway = Actor.new
+a_hathaway["name"] = "Anne Hathaway"
+a_hathaway.save
+
+# Roles population
+b_wayne = Role.new
+b_wayne["movie_id"] = Movie.find_by({ "title" => "Batman Begins" })["id"]
+b_wayne["actor_id"] = Actor.find_by({ "name" => "Christian Bale" })["id"]
+b_wayne["character_name"] = "Bruce Wayne"
+b_wayne.save
+
+puts b_wayne.inspect
 
 # Prints a header for the movies output
 puts "Movies"
